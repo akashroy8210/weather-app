@@ -23,8 +23,8 @@
 .header {
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
   display: flex;
   gap: 0.75rem;
   padding: 0.75rem 1rem; /* Slightly larger padding */
@@ -373,8 +373,8 @@
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 1.25rem;
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
   padding: 1rem 2rem; /* Increased padding inside astro strip */
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -577,7 +577,7 @@
   color: #fecaca;
   text-align: center;
   font-size: 0.95rem;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(15px);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
