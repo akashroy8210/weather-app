@@ -16,7 +16,6 @@ import {
 import { fetchWeatherData } from "./service"
 import './App.css'
 
-// Pure date-time formatter
 const formatLocalTime = (localtimeStr) => {
   if (!localtimeStr) return "";
   try {
@@ -39,7 +38,6 @@ const formatLocalTime = (localtimeStr) => {
   }
 };
 
-// UV Index descriptor helper
 const getUvLabel = (uv) => {
   if (uv <= 2) return `${uv} (Low)`;
   if (uv <= 5) return `${uv} (Moderate)`;
@@ -47,7 +45,6 @@ const getUvLabel = (uv) => {
   return `${uv} (Very High)`;
 };
 
-// Air Quality badge generator
 const getAqiPill = (airQuality) => {
   if (!airQuality) return <span className="aqi-pill unknown">N/A</span>;
   
@@ -65,7 +62,6 @@ const getAqiPill = (airQuality) => {
   }
 };
 
-// Format date for forecast items: "2024-05-21" -> "Tue, 21 May"
 const formatForecastDate = (dateStr) => {
   if (!dateStr) return "";
   try {
@@ -127,7 +123,6 @@ function App() {
             fallbackToIp();
           }
         },
-        
         (geoError) => {
           console.warn("Geo access denied/failed, falling back to IP:", geoError);
           fallbackToIp();
@@ -166,7 +161,6 @@ function App() {
   return (
     <div className='container'>
       <div className='main'>
-        {/* Search header container */}
         <form onSubmit={handleSearchSubmit} className='header'>
           <div className='input-box'>
             <span><MapPin /></span>
@@ -190,14 +184,12 @@ function App() {
           </button>
         </form>
 
-        {/* Error message display */}
         {error && (
           <div className="error-display">
             {error}
           </div>
         )}
 
-        {/* Loading display */}
         {loading && !weatherData && (
           <div className="loading-state">
             <Loader2 className="animate-spin loading-spinner" />
@@ -205,12 +197,9 @@ function App() {
           </div>
         )}
 
-        {/* Weather Dashboard containing Main Card + Feature Card + Astro Strip + 5d Forecast */}
         {!loading && weatherData && (
           <div className="weather-dashboard">
-            {/* Left Column: Core Weather Details Card */}
             <div className="weather-card">
-              {/* City details and airplane pointer */}
               <div className="weather-location">
                 <h2 className="location-title">
                   {weatherData.location.name}, {weatherData.location.country}
@@ -218,12 +207,10 @@ function App() {
                 <Navigation className="location-arrow" />
               </div>
 
-              {/* Date & Time */}
               <div className="weather-datetime">
                 {formatLocalTime(weatherData.location.localtime)}
               </div>
 
-              {/* Temperature & Icon */}
               <div className="weather-main-row">
                 <div className="temp-display">
                   <span className="temp-val">
@@ -239,17 +226,14 @@ function App() {
                 </div>
               </div>
 
-              {/* Weather Condition */}
               <div className="weather-condition-text">
                 {weatherData.current.condition.text}
               </div>
 
-              {/* Feels like temperature */}
               <div className="weather-feels-like">
                 Feels like {Math.round(weatherData.current.feelslike_c)}°C
               </div>
 
-              {/* High/Low temperatures */}
               {weatherData.forecast?.forecastday?.[0]?.day && (
                 <div className="weather-high-low-row">
                   <div className="high-low-item">
@@ -264,9 +248,7 @@ function App() {
               )}
             </div>
 
-            {/* Right Column: Detailed Metric Features Card (city-weather-feature) */}
             <div className="city-weather-feature">
-              {/* Humidity Row */}
               <div className="feature-row">
                 <div className="feature-left">
                   <div className="feature-badge">
@@ -277,7 +259,6 @@ function App() {
                 <span className="feature-value">{weatherData.current.humidity}%</span>
               </div>
 
-              {/* Wind Speed Row */}
               <div className="feature-row">
                 <div className="feature-left">
                   <div className="feature-badge">
@@ -288,7 +269,6 @@ function App() {
                 <span className="feature-value">{Math.round(weatherData.current.wind_kph)} km/h</span>
               </div>
 
-              {/* Visibility Row */}
               <div className="feature-row">
                 <div className="feature-left">
                   <div className="feature-badge">
@@ -299,7 +279,6 @@ function App() {
                 <span className="feature-value">{Math.round(weatherData.current.vis_km)} km</span>
               </div>
 
-              {/* Pressure Row */}
               <div className="feature-row">
                 <div className="feature-left">
                   <div className="feature-badge">
@@ -310,7 +289,6 @@ function App() {
                 <span className="feature-value">{Math.round(weatherData.current.pressure_mb)} hPa</span>
               </div>
 
-              {/* UV Index Row */}
               <div className="feature-row">
                 <div className="feature-left">
                   <div className="feature-badge">
@@ -323,7 +301,6 @@ function App() {
                 </span>
               </div>
 
-              {/* Air Quality Row */}
               <div className="feature-row">
                 <div className="feature-left">
                   <div className="feature-badge">
@@ -335,10 +312,8 @@ function App() {
               </div>
             </div>
 
-            {/* Bottom Row: Sunrise & Sunset Astro Strip */}
             {weatherData.forecast?.forecastday?.[0]?.astro && (
               <div className="weather-astro-strip">
-                {/* Sunrise Column */}
                 <div className="astro-block">
                   <Sunrise className="astro-icon-sunrise" />
                   <div className="astro-info">
@@ -349,10 +324,8 @@ function App() {
                   </div>
                 </div>
 
-                {/* Divider Line */}
                 <div className="astro-divider" />
 
-                {/* Sunset Column */}
                 <div className="astro-block">
                   <Sunset className="astro-icon-sunset" />
                   <div className="astro-info">
@@ -365,7 +338,6 @@ function App() {
               </div>
             )}
 
-            {/* Bottom Row: 5-Day Forecast Card Container */}
             {weatherData.forecast?.forecastday && (
               <div className="forecast-card-container">
                 <h3 className="forecast-title">5-Day Forecast</h3>
